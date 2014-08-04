@@ -1,0 +1,28 @@
+{
+  "name": "Marevl-us-Client",
+  "version": "0.0.1",
+  "homepage": "https://github.com/HarleyKwyn/marvel-us",
+  "authors": [
+    "HarleyKwyn <kwyn.meagher@gmail.com>"
+  ],
+  "description": "Marvel API UI",
+  "main": "index.html",
+  "keywords": [
+    "Marvel",
+    "Angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.21",
+    "angular-ui-router": "~0.2.10",
+    "ngFx": "~1.0.2"
+  }
+}

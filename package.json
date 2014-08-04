@@ -1,0 +1,35 @@
+{
+  "name": "marvel-us",
+  "version": "0.0.1",
+  "description": "UI for Marvel API",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma /test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HarleyKwyn/marvel-us.git"
+  },
+  "keywords": [
+    "Marvel",
+    "Angular"
+  ],
+  "author": "Kwyn Alice Meagher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HarleyKwyn/marvel-us/issues"
+  },
+  "homepage": "https://github.com/HarleyKwyn/marvel-us",
+  "devDependencies": {
+    "karma": "^0.12.19",
+    "gulp": "^3.8.7"
+  },
+  "dependencies": {
+    "express": "^4.7.2",
+    "less": "^1.7.4"
+  }
+}
