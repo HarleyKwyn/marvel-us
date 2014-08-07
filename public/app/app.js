@@ -15,9 +15,11 @@ angular.module('marvelUs', [
 .controller( 'MainController', function AppCtrl ( $scope, $location ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
+      $scope.navIsCollapsed = true;
       $scope.pageTitle = toState.data.pageTitle  ;
     }
   });
+  $scope.navIsCollapsed = true;
 })
 
 .constant('ApiKey', '353d4637ab79ee4a2aa59db0cce149ca')
@@ -25,15 +27,26 @@ angular.module('marvelUs', [
 .factory( 'MarvelService', function MarvelService($http, ApiKey){
   var entryPoint = 'http://gateway.marvel.com/v1/public/';
   var marvelService = {};
-
-  marvelService.get = function(type, id, subclass){
+  //Example requestConfig
+  // var requestConfig = {
+  //   path:[ null, null, null]
+  //   },
+  //   queryParams: {
+  //     param: value
+  //   }
+  // }
+  marvelService.get = function(requestConfig){
     var requestString = entryPoint;
-    for(var i = 0; i < arguments.length; i++){
-      requestString += arguments.length > 1 ? arguments[i] + '/' : arguments[i]
+    var pathExtension = requestConfig.path;
+    var queryParams = requestConfig.queryParams ? requestConfig.queryParams : {} ;
+    queryParams['apikey'] = ApiKey;
+
+    for(var i = 0; i < pathExtension.length; i++){
+      requestString += pathExtension.length > 1 ? pathExtension[i] + '/' : pathExtension[i]
     }
 
     var requestOptions = { 
-        params: { 'apikey': ApiKey },
+        params: queryParams,
         cache: true
       }
     return $http.get(requestString, requestOptions);
