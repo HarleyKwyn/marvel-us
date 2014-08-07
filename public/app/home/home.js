@@ -7,17 +7,29 @@ angular.module('home', [
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "app/home/home.tpl.html",
+      templateUrl: "/public/app/home/home.tpl.html",
       controller: "HomeController",
       data: { pageTitle : "Home"}
     })
 })
 
 .controller( 'HomeController', function HomeController ( $scope, $location ) {
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-    if ( angular.isDefined( toState.data.pageTitle ) ) {
-      $scope.pageName = toState.data.pageTitle + ' | Marvel-us' ;
-      console.log(toState);
-    }
-  });
+    $scope.slideInterval = 4000;
+    $scope.slides = [
+      {
+        image: "http://placekitten.com/1440/560",
+        title: "Marvel-us",
+        text: "Browse the Marvel API in style"
+      },
+      {
+        image: "http://placekitten.com/1441/560",
+        title: "Comics",
+        text: "Look through Marvels vast array of comics"
+      },
+      {
+        image: "http://placekitten.com/1442/560",
+        title: "Creators",
+        text: "Find out who creates your favorite comics"
+      }
+    ];
 });
