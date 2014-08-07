@@ -32,4 +32,18 @@ angular.module('home', [
         text: "Find out who creates your favorite comics"
       }
     ];
+    $scope.pages = [
+      {
+        title: 'Comics',
+        description: 'Explore through Marvels vast selection of comics'
+      },
+      {
+        title: 'Creators',
+        description: "Explore the creative minds of the women, men and persyns who create Marvel's amazing comics"
+      },
+      {
+        title: "Characters",
+        description: 'Explore the women, men, organizations, alien species, deities, animals, non-corporeal entities, trans-dimensional manifestations, abstract personifications, and green amorphous blobs which occupy the Marvel Universe (and various alternate universes, timelines and altered realities therein).'
+      }
+    ]
 });
