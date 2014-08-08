@@ -1,18 +1,23 @@
-<div ng-controller="ComicsController">
-  <h1 class="page-header">Dashboard</h1>
-  <div class="row comicOverview" ng-repeat="comic in comics">
-    <h2>{{comic.title}}</h2>
-    <div class="col-sm-3"> 
-      <a ng-href="/comics/{{comic.id}}"> 
-        <image class="img-thumbnail img-responsive" ng-show="comic.images.length" ng-src="{{comic.images[0].path}}.{{comic.images[0].extension}}" /> 
-<!--               <image ng-hide="comic.images.length" ng-src="/public/assets/placeholder.html"/> -->
-        <image class="img-responsive img-thumbnail" ng-hide="comic.images.length" ng-src="http://placekitten.com/400/400" />
-      </a>
-    </div>
-    <div class="col-sm-6">
-      <div class="Info">
-        {{comic.description}}
+<div class="container" ng-controller="ComicsController">
+  <div class="page-header">
+    <h1>Comics</h1>
+  </div>
+  <div class="container">
+    <div class="row comicOverview" ng-repeat="comic in comics">
+      <h2>{{comic.title}}</h2>
+      <div class="col-sm-4"> 
+        <a ng-href="/comics/{{comic.id}}"> 
+          <image class="img-thumbnail img-responsive" ng-show="comic.images.length" ng-src="{{comic.images[0].path}}.{{comic.images[0].extension}}" /> 
+        </a>
+      </div>
+      <div class="col-sm-8">
+        <div class="Info">
+          {{comic.description}}
+        </div>
       </div>
     </div>
-  </div>
+    <div class="row">
+        <button class="btn btn-info col-centered" ng-click="loadMore()">Load More</button>
+    </div>
+    </div>
 </div>

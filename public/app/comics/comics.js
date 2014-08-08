@@ -1,6 +1,7 @@
 angular.module('comics', [
     'ui.router',
     'ui.bootstrap' ])
+
 .config(function($stateProvider, $urlRouterProvider) {
   console.log("comics config");
   $stateProvider
@@ -21,14 +22,18 @@ angular.module('comics', [
 .controller('ComicsController', function ComicsController($scope, $location, $stateParams,MarvelService){
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
-      $scope.pageTitle = toState.data.pageTitle  ;
+      $scope.pageTitle = toState.data.pageTitle ;
     }
   });
+
   var marvelAPI = MarvelService;
   var requestConfig = {}
   var path = ['comics'];
+  
   requestConfig.path = path;
+
   $scope.comics = null;
+  $scope.numberOfResults = 0;
   $scope.options = {
     limit: 10,
     offset: 0
@@ -36,25 +41,27 @@ angular.module('comics', [
   marvelAPI.get(requestConfig)
     .success(function(response){
       $scope.comics = response.data.results
-      console.log(response.data.results)
     })
     .error(function(response, status) {
       console.log("Error", response, status);
     });
 
-  var loadMore = function(){
+  $scope.loadMore = function(){
     var currentOffset = $scope.options.offset;
     var currentLimit = $scope.options.limit;
-    $scope.option.offset = currentOffset + currentLimit;
+    $scope.options.offset = currentOffset + currentLimit;
+
+    requestConfig.queryParams = $scope.options;
 
     marvelAPI.get(requestConfig)
       .success(function(response){
-        $scope.comics = response.data.results
-        console.log(response.data.results)
+        console.log(response.data)
+        $scope.comics = $scope.comics.concat(response.data.results);
       })
       .error(function(response, status) {
         console.log("Error", response, status);
       });
   };
+
 })
 ;
