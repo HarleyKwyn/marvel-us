@@ -13,6 +13,8 @@ RUN   yum install -y npm
 RUN   npm install -g bower
 # Install nodemon
 RUN   npm install -g nodemon
+# Install Gulp
+RUN   npm install -g gulp
 # Bundle app source
 ADD   . /src
 # Install server dependencies
