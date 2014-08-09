@@ -2,22 +2,43 @@
   <div class="page-header">
     <h1>Comics</h1>
   </div>
+  
+  <div class="container settingsPanel" ng-click="isCollapsed = !isCollapsed">
+    <h3> Advanced Settings </h3>
+    <div class="row"> </div>
+  </div>
+
   <div class="container">
     <div class="row comicOverview" ng-repeat="comic in comics">
-      <h2>{{comic.title}}</h2>
       <div class="col-sm-4"> 
         <a ng-href="/comics/{{comic.id}}"> 
-          <image class="img-thumbnail img-responsive" ng-show="comic.images.length" ng-src="{{comic.images[0].path}}.{{comic.images[0].extension}}" /> 
+          <image class="img-thumbnail img-responsive" ng-show="comic.images.length" ng-src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" /> 
         </a>
       </div>
       <div class="col-sm-8">
-        <div class="Info">
-          {{comic.description}}
-        </div>
+      <h2 ng-href="comics/{{comic.id}}">{{comic.title}}</h2>
+        <dl class="dl-horizontal">
+          <dt> Page Count </dt>
+          <dd> {{comic.pageCount}} </dd>
+          <dt ng-show="comic.creators.available"> Creators </dt>
+          <dd ng-show="comic.creators.available">
+            <span ng-repeat="creator in comic.creators.items"> 
+              <span ng-click="redirect(creator.resourceURI)"> {{creator.name}} </span>
+              <em> {{creator.role}} </em> 
+            </span> 
+          </dd>
+        </dl>
+        <dl>
+          <dt> Description </dt>
+          <dd> {{comic.description}} </dd>
+        </dl>
       </div>
+      <br/>
     </div>
     <div class="row">
-        <button class="btn btn-info col-centered" ng-click="loadMore()">Load More</button>
+      <div class="center-block text-center">
+          <button class="btn btn-lg btn-info" ng-click="loadMore()">Load More</button>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
