@@ -3,8 +3,8 @@
     ================================================== -->
       <div class="carousel-inner" >
        <carousel interval="slideInterval">
-          <slide ng-repeat="slide in slides" active="slide.active">
-            <img ng-src="{{slide.image}}" style="margin:auto;">
+          <slide class="center-image" style="background-image: url('{{slide.image}}');" ng-repeat="slide in slides" active="slide.active">
+            <img class="center-image" src="{{slide.image}}"/>
             <div class="carousel-caption">
               <h4>{{slide.title}}</h4>
               <p>{{slide.text}}</p>
@@ -25,7 +25,7 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4" ng-repeat="pageInfo in pages">
-          <img class="img-responsive img-circle" ng-src="http://placekitten.com/40{{$index}}/400" alt="Generic placeholder image">
+          <img class="img-marketing img-circle" ng-src="{{pageInfo.image}}" alt="Generic placeholder image">
           <h2>{{pageInfo.title}}</h2>
           <p>{{pageInfo.description}}</p>
           <p><a class="btn btn-default" ng-href="/{{page.title}}" role="button">Explore &raquo;</a></p>
