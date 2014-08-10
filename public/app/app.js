@@ -8,7 +8,7 @@ angular.module('marvelUs', [
       // 'fx.animations'
 ])
 
-.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+.config(function($locationProvider,$urlRouterProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("/");
 })
@@ -27,15 +27,8 @@ angular.module('marvelUs', [
 
 .factory( 'MarvelService', function MarvelService($http, ApiKey){
   var entryPoint = 'http://gateway.marvel.com/v1/public/';
+
   var marvelService = {};
-  //Example requestConfig
-  // var requestConfig = {
-  //   path:[ null, null, null]
-  //   },
-  //   queryParams: {
-  //     param: value
-  //   }
-  // }
   marvelService.get = function(requestConfig){
     var requestString = entryPoint;
     var pathExtension = requestConfig.path;
@@ -51,6 +44,10 @@ angular.module('marvelUs', [
         cache: true
       }
     return $http.get(requestString, requestOptions);
+  };
+
+  marvelService.getURI = function(resourceURI){
+    return $http.get(resourceURI, {'apikey': ApiKey})
   };
 
   return marvelService;
@@ -71,5 +68,5 @@ angular.module('marvelUs', [
       });
     }
   }
-});
+})
 ;
