@@ -1,6 +1,7 @@
 angular.module('marvelUs', [
       'home',
       'comics',
+      'creators',
       'ui.router',
       'ui.bootstrap'
       // 'ngAnimate', 
@@ -54,4 +55,21 @@ angular.module('marvelUs', [
 
   return marvelService;
 })
+
+.directive("infiniteScroll", function($window){
+  return{
+    
+    restrict: 'A',
+    link: function(scope, elem, attrs){
+      var scrollElement = elem[0]
+      angular.element($window).bind("scroll", function() {
+             if (this.innerHeight + this.scrollY +100 > scrollElement.offsetHeight && scope.loading === false) {
+                scope.loading = true;
+                console.log("triggered")
+                scope.$apply(attrs.infiniteScroll);
+             }
+      });
+    }
+  }
+});
 ;
