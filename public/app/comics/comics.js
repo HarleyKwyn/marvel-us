@@ -3,7 +3,6 @@ angular.module('comics', [
     'ui.bootstrap' ])
 
 .config(function($stateProvider, $urlRouterProvider) {
-  console.log("comics config");
   $stateProvider
     .state('comics', {
       url: "/comics",
@@ -31,16 +30,20 @@ angular.module('comics', [
   var path = ['comics'];
   
   requestConfig.path = path;
-
+  $scope.loading = false;
+  $scope.settingCollapse = true;
   $scope.comics = null;
   $scope.numberOfResults = 0;
   $scope.options = {
     limit: 10,
     offset: 0
   };
+  requestConfig.queryParams = $scope.options;
   marvelAPI.get(requestConfig)
     .success(function(response){
+      console.log(response.data);
       $scope.comics = response.data.results
+      console.log($scope.comics);
     })
     .error(function(response, status) {
       console.log("Error", response, status);
@@ -52,10 +55,10 @@ angular.module('comics', [
     $scope.options.offset = currentOffset + currentLimit;
 
     requestConfig.queryParams = $scope.options;
-
+    console.log("trigger load")
     marvelAPI.get(requestConfig)
       .success(function(response){
-        console.log(response.data)
+        $scope.loading = false;
         $scope.comics = $scope.comics.concat(response.data.results);
       })
       .error(function(response, status) {
