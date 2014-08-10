@@ -35,8 +35,8 @@
       </div>
       <br/>
     </div>
-    <div class="row">
-       <progressbar class="progress-striped active" value="dynamic" type="info"> <i ng-show="loading">Loading</i></progressbar>
+    <div class="row" ng-show="loading">
+       <progressbar class="progress-striped active" value="100" type="info"> <i>Loading</i></progressbar>
     </div>
   </div>
 </div>
