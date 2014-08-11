@@ -15,20 +15,20 @@ angular.module('creators', [
       templateUrl: "/public/app/creators/creators.single.tpl.html",
       controller: "CreatorsController",
       data: {pageTitle: "Creators"}
-    })
+    });
 })
 
 .controller('CreatorsController', function CreatorsController($scope, $location, $stateParams, MarvelService){
   var path = ['creators'];
   if($stateParams.creatorID){
-    path.push($stateParams.creatorID)
+    path.push($stateParams.creatorID);
   }
   $scope.loading = false;
   $scope.settingCollapse = true;
   $scope.creators = null;
   $scope.numberOfResults = 0;
 
-  var requestConfig = {}
+  var requestConfig = {};
   var requestOptions = {
     orderBy : '-modified',
     limit: 10,
@@ -72,7 +72,7 @@ angular.module('creators', [
     var id = findID(tokens);
 
     if(id){
-      var url = url+id;
+      url += id;
       $location.path(url);
     }
 

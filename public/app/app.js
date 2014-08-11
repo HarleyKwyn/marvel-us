@@ -33,42 +33,39 @@ angular.module('marvelUs', [
     var requestString = entryPoint;
     var pathExtension = requestConfig.path;
     var queryParams = requestConfig.queryParams ? requestConfig.queryParams : {} ;
-    queryParams['apikey'] = ApiKey;
+    queryParams.apikey = ApiKey;
 
     for(var i = 0; i < pathExtension.length; i++){
-      requestString += pathExtension.length > 1 && i < pathExtension.length-1 ? pathExtension[i] + '/' : pathExtension[i]
+      requestString += pathExtension.length > 1 && i < pathExtension.length-1 ? pathExtension[i] + '/' : pathExtension[i];
     }
 
     var requestOptions = { 
         params: queryParams,
         cache: true
-      }
-      console.log(requestString)
-      console.log(requestOptions)
+      };
     return $http.get(requestString, requestOptions);
   };
 
   marvelService.getURI = function(resourceURI){
-    return $http.get(resourceURI, {'apikey': ApiKey})
+    return $http.get(resourceURI, {'apikey': ApiKey});
   };
 
   return marvelService;
 })
 
 .directive("infiniteScroll", function($window){
-  return{
+  return {
     
     restrict: 'A',
     link: function(scope, elem, attrs){
-      var scrollElement = elem[0]
+      var scrollElement = elem[0];
       angular.element($window).bind("scroll", function() {
          if (this.innerHeight + this.scrollY +100 > scrollElement.offsetHeight && scope.loading === false) {
             scope.loading = true;
-            console.log("triggered")
             scope.$apply(attrs.infiniteScroll);
          }
       });
     }
-  }
+  };
 })
 ;

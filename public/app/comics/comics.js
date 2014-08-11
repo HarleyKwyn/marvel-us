@@ -15,20 +15,20 @@ angular.module('comics', [
       templateUrl: "/public/app/comics/comics.single.tpl.html",
       controller: "ComicsController",
       data: {}
-    })
+    });
 })
 
 .controller('ComicsController', function ComicsController($scope, $location, $stateParams, MarvelService){
   var path = ['comics'];
   if($stateParams.comicID){
-    path.push($stateParams.comicID)
+    path.push($stateParams.comicID);
   }
   $scope.loading = false;
   $scope.settingCollapse = true;
   $scope.comics = null;
   $scope.numberOfResults = 0;
 
-  var requestConfig = {}
+  var requestConfig = {};
   var requestOptions = {
     orderBy : '-modified',
     limit: 10,
@@ -72,7 +72,7 @@ angular.module('comics', [
     var id = findID(tokens);
 
     if(id){
-      var url = url+id;
+      url += id;
       $location.path(url);
     }
 
