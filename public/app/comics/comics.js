@@ -41,6 +41,7 @@ angular.module('comics', [
     .success(function(response){
       $scope.comics = response.data.results;
       $scope.numberOfResults = response.data.total;
+      console.log($scope.comics);
     })
     .error(function(response, status) {
       console.log("Error", response, status);

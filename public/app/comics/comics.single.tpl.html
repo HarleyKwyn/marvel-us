@@ -1,0 +1,28 @@
+<div class="container" ng-controller="ComicsController">
+  <div class="col-sm-4"> 
+      <image class="img-thumbnail img-responsive" ng-src="{{comics[0].thumbnail.path}}.{{comics[0].thumbnail.extension}}" /> 
+  </div>
+  <div class="col-sm-8">
+  <h2 ng-href="comics[0]s/{{comics[0].id}}">{{comics[0].title}}</h2>
+    <dl class="dl-horizontal">
+      <dt> Series </dt>
+      <dd> {{comics[0].series.name}} </dd>
+      <dt> Page Count </dt>
+      <dd> {{comics[0].pageCount}} </dd>
+      <dt ng-show="comics[0].creators.available"> Creators </dt>
+      <dd ng-show="comics[0].creators.available">
+        <ul>
+          <li ng-repeat="creator in comics[0].creators.items"> 
+            <span>
+              <a href="#"><span ng-click="redirect(creator.resourceURI, 'creators')"> {{creator.name}} </span></a>
+              <em> {{creator.role}} </em> 
+            </span>
+          </li>
+      </dd>
+    </dl>
+    <dl ng-show="comics[0].description">
+      <dt> Description </dt>
+      <dd> {{comics[0].description}} </dd>
+    </dl>
+  </div>
+</div>
