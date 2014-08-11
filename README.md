@@ -37,6 +37,11 @@ There is a design choice still to be made whether to use a CDN for the dependenc
 
 Still a work in progress.
 
+TODO:
+Advanced search settings, Possibly include all possible search parameters for major end points. Could do this by querying the docs part of the API and dynamically render it.
+
+Better styling, always. 
+
 
 
 
