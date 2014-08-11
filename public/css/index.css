@@ -1,0 +1,33 @@
+body {
+  padding-top: 70px;
+}
+.img-marketing {
+  width: 196.5px;
+  height: 196.5px;
+}
+.img-center {
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 786px) {
+  .img-marketing {
+    width: 196.5px;
+    height: 196.5px;
+  }
+}
+/* Medium devices (desktops, 992 and up) */
+@media (min-width: 992px) {
+  .img-marketing {
+    width: 248px;
+    height: 248px;
+  }
+}
+/* Large devices (large desktops, 1200 and up) */
+@media (min-width: 1200px) {
+  .img-marketing {
+    width: 300px;
+    height: 300px;
+  }
+}
