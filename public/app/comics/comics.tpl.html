@@ -9,26 +9,34 @@
   </div>
 
   <div class="container" infinite-scroll="loadMore()">
+    <div class="row resultCount">
+      <h4>{{numberOfResults}} Results Found</h4>
+    </div>
     <div class="row comicOverview" ng-repeat="comic in comics">
       <div class="col-sm-4"> 
         <a ng-href="/comics/{{comic.id}}"> 
-          <image class="img-thumbnail img-responsive" ng-show="comic.images.length" ng-src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" /> 
+          <image class="img-thumbnail img-responsive" ng-src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" /> 
         </a>
       </div>
       <div class="col-sm-8">
       <h2 ng-href="comics/{{comic.id}}">{{comic.title}}</h2>
         <dl class="dl-horizontal">
+          <dt> Series </dt>
+          <dd> {{comic.series.name}} </dd>
           <dt> Page Count </dt>
           <dd> {{comic.pageCount}} </dd>
           <dt ng-show="comic.creators.available"> Creators </dt>
           <dd ng-show="comic.creators.available">
-            <span ng-repeat="creator in comic.creators.items"> 
-              <span ng-click="redirect(creator.resourceURI)"> {{creator.name}} </span>
-              <em> {{creator.role}} </em> 
-            </span> 
+            <ul>
+              <li ng-repeat="creator in comic.creators.items"> 
+                <span>
+                  <a href="#"><span ng-click="redirect(creator.resourceURI, 'creators')"> {{creator.name}} </span></a>
+                  <em> {{creator.role}} </em> 
+                </span>
+              </li>
           </dd>
         </dl>
-        <dl>
+        <dl ng-show="comic.description">
           <dt> Description </dt>
           <dd> {{comic.description}} </dd>
         </dl>
