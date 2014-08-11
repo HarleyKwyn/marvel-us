@@ -11,52 +11,50 @@ angular.module('comics', [
       data: { pageTitle : "Comics"}
     })
     .state('comicsID',{
-      url: "/comics/:comicID/",
-      templateUrl: "",
+      url: "/comics/:comicID",
+      templateUrl: "/public/app/comics/comics.single.tpl.html",
       controller: "ComicsController",
-      data: {pageTitle: "Comics"}
+      data: {}
     })
 })
 
-.controller('ComicsController', function ComicsController($scope, $location, $stateParams,MarvelService){
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-    if ( angular.isDefined( toState.data.pageTitle ) ) {
-      $scope.pageTitle = toState.data.pageTitle ;
-    }
-  });
-
-  var marvelAPI = MarvelService;
-  var requestConfig = {}
+.controller('ComicsController', function ComicsController($scope, $location, $stateParams, MarvelService){
   var path = ['comics'];
-  
-  requestConfig.path = path;
+  if($stateParams.comicID){
+    path.push($stateParams.comicID)
+  }
   $scope.loading = false;
   $scope.settingCollapse = true;
   $scope.comics = null;
   $scope.numberOfResults = 0;
-  $scope.options = {
+
+  var requestConfig = {}
+  var requestOptions = {
     limit: 10,
     offset: 0
   };
-  requestConfig.queryParams = $scope.options;
-  marvelAPI.get(requestConfig)
+  
+  requestConfig.path = path;
+  requestConfig.queryParams = requestOptions;
+
+  MarvelService.get(requestConfig)
     .success(function(response){
-      console.log(response.data);
-      $scope.comics = response.data.results
-      console.log($scope.comics);
+      $scope.comics = response.data.results;
+      $scope.numberOfResults = response.data.total;
     })
     .error(function(response, status) {
       console.log("Error", response, status);
     });
 
   $scope.loadMore = function(){
-    var currentOffset = $scope.options.offset;
-    var currentLimit = $scope.options.limit;
-    $scope.options.offset = currentOffset + currentLimit;
+    console.log("trigger load");
+    var currentOffset = requestOptions.offset;
+    var currentLimit = requestOptions.limit;
+    requestOptions.offset = currentOffset + currentLimit;
 
-    requestConfig.queryParams = $scope.options;
-    console.log("trigger load")
-    marvelAPI.get(requestConfig)
+    requestConfig.queryParams = requestOptions;
+    
+    MarvelService.get(requestConfig)
       .success(function(response){
         $scope.loading = false;
         $scope.comics = $scope.comics.concat(response.data.results);
@@ -66,5 +64,24 @@ angular.module('comics', [
       });
   };
 
+  $scope.redirect = function(resourceURI, pageType){
+    var url = '/'+pageType + '/';
+    var tokens = resourceURI.split('/');
+    var id = findID(tokens);
+
+    if(id){
+      var url = url+id;
+      $location.path(url);
+    }
+
+    function findID(tokens){
+      var conversion;
+      for (var i = tokens.length - 1; i >= 0; i--) {
+        conversion = parseInt(tokens[i]);
+        if(conversion) return conversion;
+      }
+      return NaN;
+    }
+  };
 })
 ;
