@@ -30,6 +30,7 @@ angular.module('comics', [
 
   var requestConfig = {}
   var requestOptions = {
+    orderBy : '-modified',
     limit: 10,
     offset: 0
   };
