@@ -9,6 +9,7 @@
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
     <script src="/public/bower_components/ngFx/dist/ngFx.js"></script>
     <script src="/public/app/comics/comics.js"></script>
+    <script src="/public/app/creators/creators.js"></script>
     <script src="/public/app/home/home.js"></script>
     <script src="/public/app/app.js"></script>
     
@@ -20,7 +21,7 @@
     <title> Marvel-Us | {{pageTitle}} </title>
   </head>
   <body>
-   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" ng-click="navIsCollapsed = !navIsCollapsed" data-target=".navbar-collapse">
@@ -37,12 +38,9 @@
             <li><a href="/creators">Creators</a></li>
             <li><a href="/characters">Characters</a></li>
           </ul>
-<!--           <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form> -->
         </div>
-      </div>
     </div>
+    </nav>
     <div ui-view></div>
   </body>
   <footer>
